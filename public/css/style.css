@@ -55,6 +55,8 @@ html, body{
 
 #video-chat-rooms{
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
   
   input {
@@ -75,3 +77,20 @@ html, body{
     padding: 12px 0;
     width: 100%;
   }
+.buttons{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 25%;
+  gap: 20px;
+  display: none;
+}
+.buttons button{
+  background-color: seagreen;
+  border: none;
+  border-radius: 1em;
+}
+#leave{
+  background-color: rgb(223, 28, 28);
+}

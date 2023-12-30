@@ -6,7 +6,10 @@ let joinBtn = document.getElementById('join')
 let roomInput = document.getElementById('roomName') 
 let userVideo = document.getElementById('user-video') 
 let peerVideo = document.getElementById('peer-video') 
-
+let buttons = document.getElementById('btnGroup')
+let muteBtn = document.getElementById('mute')
+let leaveBtn = document.getElementById('leave')
+let cameraBtn = document.getElementById('hide-camera')
 let roomName;
 
 navigator.getUserMedia = navigator.getUserMedia || navigator.webKitGetUserMedia || navigator.mozGetUserMedia ;
@@ -44,6 +47,7 @@ socket.on("created", ()=>{
         function(stream){
             userStream = stream;
             videoChatForm.style = "display: none";
+            buttons.style = "display: flex"
             userVideo.srcObject = stream;  // the video which is coming from your camera is directly saved to this path
             userVideo.onloadedmetadata = function(e){
                 userVideo.play();
@@ -65,6 +69,7 @@ socket.on("joined", ()=>{
         function(stream){
             userStream = stream;
             videoChatForm.style = "display: none";
+            buttons.style = "display: flex"
             userVideo.srcObject = stream;  // the video which is coming from your camera is directly saved to this path
             userVideo.onloadedmetadata = function(e){
                 userVideo.play();
@@ -144,5 +149,67 @@ function OnIceCandidateFunction(event){
     }
 }
 
-// to show peer video to us.
+let muteFlag = false;
 
+muteBtn.addEventListener("click", function(){
+    muteFlag = !muteFlag;
+    if(muteFlag){
+        muteBtn.textContent = "Unmute"
+        userStream.getTracks()[0].enabled = false;
+    }
+    else{
+        muteBtn.textContent = "Mute"
+        userStream.getTracks()[0].enabled = true;
+    }
+})
+
+let cameraFlag = false;
+
+cameraBtn.addEventListener("click", function(){
+    cameraFlag = !cameraFlag;
+    if(cameraFlag){
+        cameraBtn.textContent = "show"
+        userStream.getTracks()[1].enabled = false;
+    }
+    else{
+        cameraBtn.textContent = "hide"
+        userStream.getTracks()[1].enabled = true;
+    }
+})
+
+leaveBtn.addEventListener("click", function(){
+    socket.emit("leave", roomName);
+    videoChatForm.style = "display: block";
+    buttons.style = "display: none";
+
+    if(userVideo.srcObject){
+        userVideo.srcObject.getTracks()[0].stop();
+        userVideo.srcObject.getTracks()[1].stop();
+    }
+    if(peerVideo.srcObject){
+        peerVideo.srcObject.getTracks()[0].stop();
+        peerVideo.srcObject.getTracks()[1].stop();
+    }
+    if(rtcPeerConnection){
+        rtcPeerConnection.ontrack = null;
+        rtcPeerConnection.onicecandidate = null;
+        rtcPeerConnection.close();
+    }
+
+    
+
+})
+
+socket.on("leave", ()=>{
+    creator = true;
+    
+    if(peerVideo.srcObject){
+        peerVideo.srcObject.getTracks()[0].stop();
+        peerVideo.srcObject.getTracks()[1].stop();
+    }
+    if(rtcPeerConnection){
+        rtcPeerConnection.ontrack = null;
+        rtcPeerConnection.onicecandidate = null;
+        rtcPeerConnection.close();
+    }
+})

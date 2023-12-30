@@ -67,5 +67,9 @@ io.on("connection", (socket)=>{
     socket.on("answer", (answer, roomName)=>{
         io.sockets.in(roomName).emit("answer", answer);
     });
+    socket.on("leave", (roomName)=>{
+        socket.leave(roomName);
+        io.sockets.in(roomName).emit("leave");
+    })
 });
 
