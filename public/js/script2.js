@@ -1,3 +1,4 @@
+console.log("page loaded")
 let socket = io();
 
 let videoChatForm = document.getElementById('video-chat-form')

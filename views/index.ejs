@@ -4,28 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2l4njSHtBepjGYktKn6nwtEkPVfWOoW8I1A">
-    <title>Video Chat</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <title>Click Talk - Baat karni hai ClickTalk kro</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div id="video-chat-form">
-        <h2 class="text">Video Chat App</h2>
-        <input id="roomName" type="text" placeholder="Room Name" name="roomName" />
-        <button id="join">Join</button>
+    <div class="main">
+        <div class="nav">
+            <img src="/src/ct2-removebg-preview.png" alt="Logo">
+            <h1>Click Talk</h1>
+        </div>
+        <div class="container">
+            <img src="https://img.freepik.com/free-vector/hand-drawn-friends-videoconferencing-scene_23-2148831007.jpg?w=826&t=st=1714244199~exp=1714244799~hmac=45b05b74f1691754b1f35fe86329d93810727cfa1d50dd33878733e86bbf3951" alt="">
+            <div class="content-body" role="main" aria-label="main content">
+                <div class="HiddenText"><a id="the-main-content" tabindex="-1"></a></div>
+                <div class="content"><!--customize position-->
+                    <img src="/src/ct3-removebg-preview.png" class="zoom-logo" alt="Zoom Logo">  <!--customize company logo-->
+                    <p style="width: 60%; margin: 20px 0px;">Experence the future of communication with clickTalk - where crystal clear video conferencing meets unparalleled simplicity.</p>
+                    <div class="row">
+                        <div class="left">
+                            <form action="/join" method="get">
+                                <button class="button">Join Room</button>
+                            </form>
+                        </div>
+                        <div class="left">
+                            <form action="/create" method="get">
+                                <button class="button">Create Room</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="left">
+                        </div>
+                    </div>
+                    <p class="made-with">Source Code<a href="https://github.com/vivek-650/VC-App"> ClickTalk</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="">Getting Started</a>
+            <a href="">Download Client</a>
+            <a href="" target="_blank">ClickTalk Support</a>
+        </div>
     </div>
-    <div id="video-chat-rooms">
-        <video id="user-video" autoplay muted></video>
-        <video id="peer-video" autoplay ></video>
-        <!-- <img src="https://travelinsurance.com.ph/storage/BGC%20Office%20-%201.jpeg" alt=""> -->
-    </div>
-    <div class="buttons" id="btnGroup">
-        <button id="mute">Mute </button>
-        <button id="leave">Leave</button>
-        <button id="hide-camera">Hide camera</button>
-    </div>
-
 </body>
-<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
-<script src="js/script.js"></script>
 </html>

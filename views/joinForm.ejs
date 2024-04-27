@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2l4njSHtBepjGYktKn6nwtEkPVfWOoW8I1A">
+    <title>Create Room</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="nav">
+        <img src="/src/ct2-removebg-preview.png" alt="">
+        <h1>Click Talk</h1>
+    </div>
+    <div id="video-chat-form">
+        <!-- <h2 class="text">Video Chat App</h2> -->
+        <input id="roomName" type="text" placeholder="Enter Room Name" name="roomName" />
+        <button id="join" class="button">Join Room</button>
+    </div>
+    <div id="video-chat-rooms">
+        <video id="user-video" autoplay muted></video>
+        <video id="peer-video" autoplay ></video>
+        <!-- <img src="https://travelinsurance.com.ph/storage/BGC%20Office%20-%201.jpeg" alt=""> -->
+    </div>
+    <div class="buttons" id="btnGroup">
+        <button id="mute">Mute </button>
+        <button id="leave">Leave</button>
+        <button id="hide-camera">Hide camera</button>
+    </div>
+</body>
+<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+<script src="js/script2.js"></script>
+</html>

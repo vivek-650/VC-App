@@ -1,28 +1,30 @@
-const express = require("express")
+const express = require("express");
 const app = express();
-const socket = require("socket.io")
- let port = 3000
- const server = app.listen(port, ()=>{
-    console.log(`server is running at ${port}`)
- })
+const socket = require("socket.io");
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
- const bodyParser = require("body-parser");
- app.use(bodyParser.json());
- app.use(bodyParser.urlencoded({extended: true}));
+app.set('view engine', 'ejs');
+app.set('views', './views');
+app.use(express.static('public'));
 
- app.set('view engine' , 'ejs');
- app.set('views', './views');
+const server = app.listen(3000, () => {
+    console.log("Server is running at port 3000");
+});
+app.get("/", (req, res) =>{
+    res.render("index.ejs");
+})
+app.get("/create", (req, res) => {
+    res.render("videoForm.ejs");
+});
+app.get("/join", (req, res) => {
+    res.render("joinForm.ejs");
+});
 
- app.use(express.static('public'));
-
-
-const userRoute = require("./routes/userRoute")
-app.use('/', userRoute);
-
- 
-
-let io = socket(server); // server conenction to socket
+let io = socket(server); 
+// server conenction to socket
 io.on("connection", (socket)=>{
     console.log("user conected: "+socket.id);
 
