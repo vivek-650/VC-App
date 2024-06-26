@@ -53,8 +53,6 @@ socket.on("created", ()=>{
             userVideo.onloadedmetadata = function(e){
                 userVideo.play();
             }
-            // console.log(roomName)
-            // socket.emit("ready", roomName);
         },
         function(error){
             alert("you can't access Media")
@@ -155,11 +153,11 @@ let muteFlag = false;
 muteBtn.addEventListener("click", function(){
     muteFlag = !muteFlag;
     if(muteFlag){
-        muteBtn.textContent = "Unmute"
+        muteBtn.innerHTML = `<i class="ri-mic-off-fill"></i>`
         userStream.getTracks()[0].enabled = false;
     }
     else{
-        muteBtn.textContent = "Mute"
+        muteBtn.innerHTML = `<i class="ri-mic-fill"></i>`
         userStream.getTracks()[0].enabled = true;
     }
 })
@@ -169,11 +167,11 @@ let cameraFlag = false;
 cameraBtn.addEventListener("click", function(){
     cameraFlag = !cameraFlag;
     if(cameraFlag){
-        cameraBtn.textContent = "show"
+        cameraBtn.innerHTML = `<i class='bx bx-video-off' ></i>`
         userStream.getTracks()[1].enabled = false;
     }
     else{
-        cameraBtn.textContent = "hide"
+        cameraBtn.innerHTML = `<i class='bx bx-video'></i>`
         userStream.getTracks()[1].enabled = true;
     }
 })
