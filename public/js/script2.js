@@ -27,7 +27,15 @@ let iceServers = {
         {urls: "stun:stun.l.google.com:19302"}
     ]
 }
-
+socket.on('peer-video-off', (peerId) => {
+    // handleVideoOff(peerId);
+    console.log("peer video off");
+  });
+  
+  socket.on('peer-video-on', (stream, peerId) => {
+    // handleVideoOn(stream, peerId);
+    console.log("perr video on")
+  });
 joinBtn.addEventListener('click', function(){
     if(roomInput.value == ''){
         alert("please enter the room name")
@@ -71,6 +79,7 @@ socket.on("joined", ()=>{
             videoChatForm.style = "display: none";
             buttons.style = "display: flex"
             userVideo.style = "display: block"
+            console.log("this is stream", stream)
             userVideo.srcObject = stream;  // the video which is coming from your camera is directly saved to this path
             userVideo.onloadedmetadata = function(e){
                 userVideo.play();
@@ -218,3 +227,5 @@ socket.on("leave", ()=>{
         rtcPeerConnection.close();
     }
 })
+
+
