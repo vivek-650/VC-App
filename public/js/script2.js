@@ -49,6 +49,7 @@ socket.on("created", ()=>{
             userStream = stream;
             videoChatForm.style = "display: none";
             buttons.style = "display: flex"
+            userVideo.style = "display: block"
             userVideo.srcObject = stream;  // the video which is coming from your camera is directly saved to this path
             userVideo.onloadedmetadata = function(e){
                 userVideo.play();
@@ -69,6 +70,7 @@ socket.on("joined", ()=>{
             userStream = stream;
             videoChatForm.style = "display: none";
             buttons.style = "display: flex"
+            userVideo.style = "display: block"
             userVideo.srcObject = stream;  // the video which is coming from your camera is directly saved to this path
             userVideo.onloadedmetadata = function(e){
                 userVideo.play();
@@ -132,7 +134,8 @@ socket.on("candidate", (candidate)=>{
 })
 
 function OnTrackFunction(event){
-    console.log("event.streams")
+    console.log("this is the event")
+    console.log(event.streams)
     peerVideo.srcObject = event.streams[0]; 
     peerVideo.onloadedmetadata = function(e){
         peerVideo.play();
@@ -169,6 +172,7 @@ cameraBtn.addEventListener("click", function(){
     if(cameraFlag){
         cameraBtn.innerHTML = `<i class='bx bx-video-off' ></i>`
         userStream.getTracks()[1].enabled = false;
+        userVideo.innerHTML
     }
     else{
         cameraBtn.innerHTML = `<i class='bx bx-video'></i>`
@@ -184,10 +188,12 @@ leaveBtn.addEventListener("click", function(){
     if(userVideo.srcObject){
         userVideo.srcObject.getTracks()[0].stop();
         userVideo.srcObject.getTracks()[1].stop();
+        userVideo.style = "display: none"
     }
     if(peerVideo.srcObject){
         peerVideo.srcObject.getTracks()[0].stop();
         peerVideo.srcObject.getTracks()[1].stop();
+        peerVideo.style = "display: none"
     }
     if(rtcPeerConnection){
         rtcPeerConnection.ontrack = null;
